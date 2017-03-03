@@ -1,7 +1,7 @@
 <?php
 
 $routes = [
-    'home'     => 'default',
+    'home'     => 'user',
     'about'    => 'default',
     'contact'  => 'default',
     'register' => 'user',

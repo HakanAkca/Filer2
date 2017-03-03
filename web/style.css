@@ -29,12 +29,6 @@ li:hover {
     color: red;
 }
 
-form {
-    margin: 0 auto;
-    display: block;
-    margin-top: 7%;
-}
-
 .header{
     text-align: center;
 }
@@ -167,8 +161,77 @@ input:-moz-placeholder {
     background: -webkit-gradient(linear, left top, left bottom, from(#a4b0cb), to(#b9c5dd));
 }
 
-#placement {
-    margin-left: 39.7%;
-    position: absolute;
-    top: 39%;
+.flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    margin-left: 9%;
 }
+
+#flex2 {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    width: 100%;
+}
+
+#flex2 form {
+    padding: 20px;
+    width: 30%;
+    border: 1px solid black;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.size_upload {
+    width: 25%;
+    margin-top: 5%;
+}
+
+.size_upload input {
+    width: 56%;
+}
+
+.size_upload .img_upload {
+    width: 60%;
+    height: 40%;
+}
+
+.icone {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.place2 {
+    width: 61%;
+    display: none;
+}
+
+.input_place {
+    margin-top: 4%;
+}
+
+.flex3{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    margin-left: 9%;
+}
+
+.size_upload2 .img_upload2 {
+    width: 25%;
+    margin-top: 5%;
+}
+
+.place2bis {
+    display: none;
+}
+

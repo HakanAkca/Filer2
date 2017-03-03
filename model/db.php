@@ -79,3 +79,14 @@ function find_all_secure($query, $data = [])
     return $result;
 }
 
+function give_me_date(){
+    $date = date("d-m-Y");
+    $heure = date("H:i");
+    return $date . " " . $heure;
+}
+
+function watch_action_log($file, $text){
+    $file_log = fopen('logs/' . $file, 'a');
+    fwrite($file_log, $text);
+    fclose($file_log);
+}

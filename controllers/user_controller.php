@@ -5,15 +5,12 @@ require_once('model/user.php');
 function login_action()
 {
     $error = '';
-    if ($_SERVER['REQUEST_METHOD'] === 'POST')
-    {
-        if (user_check_login($_POST))
-        {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (user_check_login($_POST)) {
             user_login($_POST['username']);
             header('Location: ?action=home');
             exit(0);
-        }
-        else {
+        } else {
             $error = "Invalid username or password";
         }
     }
@@ -31,22 +28,57 @@ function logout_action()
 function register_action()
 {
     $error = '';
-    if ($_SERVER['REQUEST_METHOD'] === 'POST')
-    {
-        if (user_check_register($_POST))
-        {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (user_check_register($_POST)) {
             user_register($_POST);
             header('Location: ?action=home');
             exit(0);
-        }
-        else {
+        } else {
             $error = "Invalid data";
-        }    
+        }
     }
     require('views/register.php');
 }
 
+function home_action()
+{
+
+    if (!empty($_SESSION['user_id'])) {
+
+        $data = show_upload_img2();
+
+        require('views/home.php');
+    } else {
+        header('Location: ?action=login');
+    }
+}
+
 function profil_action()
 {
-    require('views/profil.php');
+    $error = '';
+    if (!empty($_SESSION['user_id'])) {
+        if (check_upload()) {
+            header("Refresh:0");
+            exit(0);
+        }
+
+        if (delete_file()) {
+            header("Refresh:0");
+            exit(0);
+        }
+
+        if (rename_file()) {
+            header("Refresh:0");
+            exit(0);
+        }
+        if (file_replace()){
+            header("Refresh:0");
+            exit(0);
+        }
+        $data = show_upload_img();
+
+        require('views/profil.php');
+    } else {
+        header('Location: ?action=login');
+    }
 }
