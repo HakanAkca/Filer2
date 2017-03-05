@@ -82,6 +82,9 @@ function check_upload()
                     $name['url'] = 'uploads/' . $_SESSION['user_name'] . '/' . $name['name'];
                     $name['id_user'] = $_SESSION['user_id'];
                     db_insert('image', $name);
+                    $date = take_date();
+                    $write = $date . ' -- ' . $_SESSION['user_name'] . " upload " . $_FILES['file']['name'] . "\n";
+                    watch_action_log('access.log', $write);
                 }
             } else {
                 $name_file = $_FILES['file']['name'];
@@ -90,8 +93,10 @@ function check_upload()
                 $name['url'] = 'uploads/' . $_SESSION['user_name'] . '/' . $name['name'];
                 $name['id_user'] = $_SESSION['user_id'];
                 db_insert('image', $name);
-
                 move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . $_SESSION['user_name'] . '/' . $name['name']);
+                $date = take_date();
+                $write = $date . ' -- ' . $_SESSION['user_name'] . " upload " . $_POST['add_name'] . $extension . "\n";
+                watch_action_log('access.log', $write);
             }
         }
     }
@@ -116,9 +121,9 @@ function delete_file()
         $url = $_POST['file_name'];
         $delete = find_one_secure("DELETE FROM image WHERE url = :url", ['url' => $url]);
         unlink("$url");
-        $date = give_me_date();
-        $actions = $date . ' -- ' .$_SESSION['user_name'] . ' has just registered.' ."\n";
-        watch_action_log('access.log',$actions);
+        $date = take_date();
+        $write = $date . ' -- ' . $_SESSION['user_name'] . " " . $url . ' has deletted.' . "\n";
+        watch_action_log('access.log', $write);
         return $delete;
     }
 }
@@ -138,6 +143,9 @@ function rename_file()
                 'id_user' => $id_users])
         ) {
             rename($a, $new_url);
+            $date = take_date();
+            $write = $date . ' -- ' . $_SESSION['user_name'] . " change " . $b . ' to ' . $new_name . "\n";
+            watch_action_log('access.log', $write);
             return true;
         }
     }
@@ -150,19 +158,48 @@ function file_replace()
         $id_users = $_SESSION['user_id'];
         $new_file_name = $_FILES['add']['name'];
         $new_file_url = 'uploads/' . $_SESSION['user_name'] . "/" . $new_file_name;
-        $current_file_name = $_POST['replace_img'];
-        $current_file_url = 'uploads/' . $_SESSION['user_name'] . "/" . $current_file_name;
+        $file_name = $_POST['replace_img'];
+        $file_url = 'uploads/' . $_SESSION['user_name'] . "/" . $file_name;
         $file_tmp_name = $_FILES['add']['tmp_name'];
-        if (!find_one_secure("UPDATE image SET `name` = :new_file_name , `url` = :new_file_url WHERE `id_user` = :id_users AND `name` = :current_file_name",
+        if (!find_one_secure("UPDATE image SET `name` = :new_file_name , `url` = :new_file_url WHERE `id_user` = :id_users AND `name` = :file_name",
             ['new_file_name' => $new_file_name,
                 'new_file_url' => $new_file_url,
-                'current_file_name' => $current_file_name,
+                'file_name' => $file_name,
                 'id_users' => $id_users])
         ) {
             move_uploaded_file($file_tmp_name, $new_file_url);
-            unlink($current_file_url);
+            unlink($file_url);
+            $date = take_date();
+            $write = $date . ' -- ' . $_SESSION['user_name'] . " change " . $new_file_name . ' to ' . $file_name . "\n";
+            watch_action_log('access.log', $write);
             return true;
 
         }
+    }
+}
+
+function add_folder()
+{
+    if (isset($_POST['create_dir'])) {
+        if (isset($_POST['name_dir']) AND $_POST['name_dir'] !== '') {
+            $name_folder = $_POST['name_dir'];
+            $url = 'uploads/' . $_SESSION['user_name'] . '/' . $name_folder;
+            mkdir($url, 0700);
+            $date = take_date();
+            $write = $date . ' -- ' . $_SESSION['user_name'] . " create folder " . $name_folder . "\n";
+            watch_action_log('access.log', $write);
+        }
+    }
+}
+
+function delete_dir()
+{
+    if ($_POST['delete_dir']) {
+        $name_folder = $_POST['delete_name_dir'];
+        $url = 'uploads/' . $_SESSION['user_name'] . '/' . $name_folder;
+        unlink("$url");
+        $date = take_date();
+        $write = $date . ' -- ' . $_SESSION['user_name'] . " " . $url . ' folder has deletted.' . "\n";
+        watch_action_log('access.log', $write);
     }
 }

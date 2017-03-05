@@ -8,8 +8,8 @@
     <body>
     <nav>
         <ul>
-            <li>Home</li>
-            <li><?php echo $_SESSION['user_name'] ?></li>
+            <li><a>Home</a></li>
+            <li><a<?php echo $_SESSION['user_name'] ?></a></li>
             <li><a href="?action=profil">Profil</a></li>
             <li><a href="?action=logout">Logout</a></li>
         </ul>
@@ -19,13 +19,23 @@
     foreach ($data as $name) {
         $a = $name['url'];
         $b = $name['name'];
-        echo "<div class='size_upload'>";
-        echo "<img class='img_upload' src=" . $a .
-            " alt=" . $name['name'] . ">";
-        echo "<div class='icone'>";
-        echo "<a id='lol' href='".$name['url']."'download><img src='web/image/download.png'></a>";
-        echo "</div>";
-        echo "</div>";
+        $path_parts = pathinfo($name["name"]);
+        if($path_parts['extension'] == "png" || $path_parts['extension'] == "jpg" || $path_parts['extension'] == "gif" || $path_parts['extension'] == "jpeg" ) {
+            echo "<div class='size_upload'>";
+            echo "<img class='img_upload' src=" . $a . " alt=" . $name['name'] . ">";
+            echo "<div class='icone'>";
+            echo "<a id='lol' href='" . $name['url'] . "'download><img src='web/image/download.png'></a>";
+            echo "</div>";
+            echo "</div>";
+        } else if ($path_parts['extension'] == 'txt'){
+            echo "<div class='size_upload'>";
+            echo "<img class='img_upload' src='web/image/txt.png' alt=" . $name['name'] . ">";
+            echo file_get_contents($path_parts);
+            echo "<div class='icone'>";
+            echo "<a id='lol' href='" . $name['url'] . "'download><img src='web/image/download.png'></a>";
+            echo "</div>";
+            echo "</div>";
+        }
     }
     echo "</div>";
     ?>

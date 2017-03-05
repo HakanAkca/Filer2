@@ -1,32 +1,35 @@
 body {
-    background-color: #BBBBBB;
+    background-color: lightgrey;
 }
 
-nav{
-    display: flex;
-    height: 40px;
+nav {
+    margin-top: -8px;
+    width: 1680px;
+    margin-left: -8px;
 }
+
 ul {
-    list-style: none;
+    list-style-type: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    padding-left: 5px;
-    padding-right: 5px;
+    overflow: hidden;
+    background-color: #333;
 }
+
 li {
+    float: left;
+}
+
+li a {
     display: block;
-    color: black;
+    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    list-style: none;
 }
 
-li:hover {
-    color: red;
+li a:hover {
+    background-color: #111;
 }
 
 .header{
@@ -51,6 +54,13 @@ li:hover {
     border-radius: 5px;
     display: table;
     position: static;
+    margin-top: 12.5%;
+    margin-left: 35%;
+}
+
+#placement {
+    margin-left: 38.7%;
+    margin-top: -3%;
 }
 
 #signup .header {
@@ -176,6 +186,7 @@ input:-moz-placeholder {
     justify-content: space-around;
     text-align: center;
     width: 100%;
+    margin-top: 2%;
 }
 
 #flex2 form {
@@ -209,7 +220,8 @@ input:-moz-placeholder {
 
 .place2 {
     width: 61%;
-    display: none;
+
+    visibility: hidden;
 }
 
 .input_place {
@@ -232,6 +244,6 @@ input:-moz-placeholder {
 }
 
 .place2bis {
-    display: none;
+    visibility: hidden;
 }
 

@@ -79,7 +79,7 @@ function find_all_secure($query, $data = [])
     return $result;
 }
 
-function give_me_date(){
+function take_date(){
     $date = date("d-m-Y");
     $heure = date("H:i");
     return $date . " " . $heure;

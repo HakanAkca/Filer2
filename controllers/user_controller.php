@@ -31,7 +31,7 @@ function register_action()
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (user_check_register($_POST)) {
             user_register($_POST);
-            header('Location: ?action=home');
+            header('Location: ?action=login');
             exit(0);
         } else {
             $error = "Invalid data";
@@ -71,8 +71,15 @@ function profil_action()
             header("Refresh:0");
             exit(0);
         }
+
         if (file_replace()){
             header("Refresh:0");
+            exit(0);
+        }
+        if (add_folder()){
+            exit(0);
+        }
+        if (delete_dir()){
             exit(0);
         }
         $data = show_upload_img();

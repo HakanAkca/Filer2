@@ -1,22 +1,27 @@
-window.onload = function(){
+window.onload = function () {
 
-    var input = document.querySelectorAll('.click');
-    console.log(input);
-    var lolol = document.querySelectorAll('.place2');
+    var input = document.querySelector('#click');
+    var hide = document.querySelector('#hide');
 
-    console.log(name);
-    var name2 = document.querySelectorAll('.place2bis');
+    input.onclick = function () {
+        var lolol = document.querySelectorAll('.place2');
+        var name2 = document.querySelectorAll('.place2bis');
+        for (var i = 0; i < lolol.length; i++) {
 
-    console.log(name2);
-
-    for(i = 0; i<input.length;i++) {
-        console.log('ok');
-        input[i].onclick = function () {
-            console.log('ok2');
             lolol[i].style.visibility = 'visible';
-            console.log('ok3');
-            name2[i].style.visibility = "visible";
-            console.log('ok4');
+            console.log(lolol);
+            name2[i].style.visibility = 'visible';
+        };
+    }
+
+    hide.onclick = function () {
+        var lolol = document.querySelectorAll('.place2');
+        var name2 = document.querySelectorAll('.place2bis');
+        for (var i = 0; i < lolol.length; i++) {
+
+            lolol[i].style.visibility = 'hidden';
+            console.log(lolol);
+            name2[i].style.visibility = 'hidden';
         };
     }
 };
