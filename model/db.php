@@ -86,7 +86,14 @@ function take_date(){
 }
 
 function watch_action_log($file, $text){
-    $file_log = fopen('logs/' . $file, 'a');
+    $file_log = fopen('logs/' . $file);
+    fwrite($file_log, $text);
+    fclose($file_log);
+}
+
+
+function watch_security_log($file, $text){
+    $file_log = fopen('logs/' . $file);
     fwrite($file_log, $text);
     fclose($file_log);
 }

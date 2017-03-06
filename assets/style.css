@@ -247,3 +247,31 @@ input:-moz-placeholder {
     visibility: hidden;
 }
 
+.top {
+    position: absolute;
+    margin-top: 3px;
+    margin-left: -20px;
+}
+
+#input-size{
+    width: 200px;
+    margin-right: 25px;
+}
+
+#input-size2{
+    width: 300px;
+}
+
+#input-size3{
+    width: 200px;
+    margin-right: 20px;
+}
+
+#size-dir{
+    width: 200px;
+}
+
+#size-dir2{
+    width: 200px;
+}
+

@@ -23,7 +23,6 @@ function user_check_register($data)
     $data = get_user_by_username($data['username']);
     if ($data !== false)
         return false;
-    // TODO : Check valid email
     return true;
 }
 
@@ -70,7 +69,9 @@ function check_upload()
 {
     $exist_deja = true;
     $format_accepte = false;
-    if (($_FILES['file']['type'] == 'image/jpeg') || ($_FILES['file']['type'] == 'image/png') || ($_FILES['file']['type'] == 'image/jpg') || $_FILES['file']['type'] == 'text/plain') {
+    if (($_FILES['file']['type'] == 'image/jpeg') || ($_FILES['file']['type'] == 'image/png') ||
+        ($_FILES['file']['type'] == 'image/jpg') || ($_FILES['file']['type'] == 'text/plain') ||
+        ($_FILES['file']['type'] == 'audio/mp3')|| ($_FILES['file']['type'] == 'video/mp4')) {
         $format_accepte = true;
         if (file_exists('uploads/' . $_SESSION['user_name'] . '/' . $_FILES['file']['name'])) {
             $exist_deja = true;
@@ -195,11 +196,37 @@ function add_folder()
 function delete_dir()
 {
     if ($_POST['delete_dir']) {
-        $name_folder = $_POST['delete_name_dir'];
+        $name_folder = $_POST['dir'];
         $url = 'uploads/' . $_SESSION['user_name'] . '/' . $name_folder;
-        unlink("$url");
+        rmdir("$url");
         $date = take_date();
         $write = $date . ' -- ' . $_SESSION['user_name'] . " " . $url . ' folder has deletted.' . "\n";
         watch_action_log('access.log', $write);
     }
+}
+
+function change_name()
+{
+    if (isset($_POST['rename_dir'])) {
+        $name_folder = $_POST['last_dir'];
+        $url = 'uploads/' . $_SESSION['user_name'] . '/' . $name_folder;
+        $new_name_folder = $_POST['new_dir'];
+        $url2 = 'uploads/' . $_SESSION['user_name'] . '/' . $new_name_folder;
+        rename($url, $url2);
+    }
+}
+
+function listFolders()
+{
+    $url = scandir('uploads/' . $_SESSION['user_name']);
+    $return = array();
+
+    foreach ($url as $folder) {
+        if ($folder != '.' && $folder != '..') {
+            if (is_dir('uploads/' . $_SESSION['user_name'] . '/' . $folder)) {
+                $return[] = array($folder);
+            }
+        }
+    }
+    return $return;
 }

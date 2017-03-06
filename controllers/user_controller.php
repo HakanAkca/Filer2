@@ -12,6 +12,9 @@ function login_action()
             exit(0);
         } else {
             $error = "Invalid username or password";
+            $date = take_date();
+            $write = $date . ' -- ' . 'Invalid username or Password' . "\n";
+            watch_action_log('security.log', $write);
         }
     }
     require('views/login.php');
@@ -35,6 +38,9 @@ function register_action()
             exit(0);
         } else {
             $error = "Invalid data";
+            $date = take_date();
+            $write = $date . ' -- ' . $_SESSION['user_name'] . ' Illegal data in register' . "\n";
+            watch_action_log('security.log', $write);
         }
     }
     require('views/register.php');
@@ -44,11 +50,13 @@ function home_action()
 {
 
     if (!empty($_SESSION['user_id'])) {
-
         $data = show_upload_img2();
 
         require('views/home.php');
     } else {
+        $date = take_date();
+        $write = $date . ' -- ' . 'Illegal route Login to Home' . "\n";
+        watch_action_log('security.log', $write);
         header('Location: ?action=login');
     }
 }
@@ -76,16 +84,25 @@ function profil_action()
             header("Refresh:0");
             exit(0);
         }
+
         if (add_folder()){
             exit(0);
         }
         if (delete_dir()){
             exit(0);
         }
+
+        if (change_name()){
+            exit(0);
+        }
+        $file = listFolders();
         $data = show_upload_img();
 
         require('views/profil.php');
     } else {
+        $date = take_date();
+        $write = $date . ' -- ' . $_SESSION['user_name'] . ' Illegal route Login to Profil' . "\n";
+        watch_action_log('security.log', $write);
         header('Location: ?action=login');
     }
 }

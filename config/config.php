@@ -2,8 +2,6 @@
 
 $routes = [
     'home'     => 'user',
-    'about'    => 'default',
-    'contact'  => 'default',
     'register' => 'user',
     'login'    => 'user',
     'logout'   => 'user',
