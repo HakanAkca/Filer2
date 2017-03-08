@@ -5,6 +5,10 @@ require_once('model/user.php');
 function login_action()
 {
     $error = '';
+    if(isset($_SESSION['user_id'])){
+        header('Location: ?action=home');
+        exit(0);
+    }
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (user_check_login($_POST)) {
             user_login($_POST['username']);
