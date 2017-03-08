@@ -9,10 +9,8 @@
 <nav>
     <ul>
         <li><a>Home</a></li>
-        <li><a<?php echo $_SESSION['user_name'] ?></a></li>
         <li><a href="?action=profil">Profil</a></li>
         <li><a href="?action=logout">Logout</a></li>
-        <audio>class='img_upload' src=" . $a . " alt=" . $name['name'] .</audio>
     </ul>
 </nav>
 <?php
@@ -27,7 +25,7 @@ foreach ($data as $name) {
         echo "<div class='size_upload'>";
         echo "<img class='img_upload' src=" . $a . " alt=" . $name['name'] . ">";
         echo "<div class='icone'>";
-        echo "<a id='lol' href='" . $name['url'] . "'download><img src='assets/image/download.png'></a>";
+        echo "<a href='" . $name['url'] . "'download><img alt src='assets/image/download.png'></a>";
         echo "<span>" . $b . "</span>";
         echo "</div>";
         echo "</div>";
@@ -36,7 +34,7 @@ foreach ($data as $name) {
         echo "<img class='img_upload' src='assets/image/txt.png' alt=" . $name['name'] . ">";
         echo file_get_contents($path_parts);
         echo "<div class='icone'>";
-        echo "<a id='lol' href='" . $name['url'] . "'download><img src='assets/image/download.png'></a>";
+        echo "<a id='lol' href='" . $name['url'] . "'download><img alt src='assets/image/download.png'></a>";
         echo "<span>" . $b . "</span>";
         echo "</div>";
         echo "</div>";
@@ -44,7 +42,7 @@ foreach ($data as $name) {
         echo "<div class='size_upload'>";
         echo "<audio controls src='$a' class='img_upload'></audio>";
         echo "<div class='icone'>";
-        echo "<a id='lol' href='" . $name['url'] . "'download><img src='assets/image/download.png'></a>";
+        echo "<a href='" . $name['url'] . "'download><img alt src='assets/image/download.png'></a>";
         echo "<span>" . $b . "</span>";
         echo "</div>";
         echo "</div>";
@@ -52,7 +50,23 @@ foreach ($data as $name) {
         echo "<div class='size_upload'>";
         echo "<video controls src='$a' class='img_upload'></video>";
         echo "<div class='icone'>";
-        echo "<a id='lol' href='" . $name['url'] . "'download><img src='assets/image/download.png'></a>";
+        echo "<a href='" . $name['url'] . "'download><img alt src='assets/image/download.png'></a>";
+        echo "<span>" . $b . "</span>";
+        echo "</div>";
+        echo "</div>";
+    } else if ($path_parts['extension'] == 'doc') {
+        echo "<div class='size_upload'>";
+        echo "<img class='img_upload' src='assets/image/doc.png' alt=" . $name['name'] . ">";
+        echo "<div class='icone'>";
+        echo "<a href='" . $name['url'] . "'download><img alt src='assets/image/download.png'></a>";
+        echo "<span>" . $b . "</span>";
+        echo "</div>";
+        echo "</div>";
+    } else if ($path_parts['extension'] == 'pdf') {
+        echo "<div class='size_upload'>";
+        echo "<img class='img_upload' src='assets/image/doc.png' alt=" . $name['name'] . ">";
+        echo "<div class='icone'>";
+        echo "<a href='" . $name['url'] . "'download><img alt src='assets/image/download.png'></a>";
         echo "<span>" . $b . "</span>";
         echo "</div>";
         echo "</div>";

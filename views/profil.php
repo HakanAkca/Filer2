@@ -68,12 +68,11 @@ foreach ($data as $name) {
     $a = $name['url'];
     $b = $name['name'];
     $path_infos = pathinfo($name["name"]);
-    //$file = file_get_contents($path_parts['name']);
     if ($path_infos['extension'] == 'png' || $path_infos['extension'] == 'jpg' || $path_parts['extension'] == 'gif' || $path_infos['extension'] == 'jpeg') {
         echo "<div class='size_upload'>";
         echo "<img alt='' class='img_upload' src=" . $a . " alt=" . $name['name'] . ">";
         echo "<div class='icone'>";
-        echo "<a id='lol' href='" . $name['url'] . "'download><img alt src='assets/image/download.png'></a>";
+        echo "<a href='" . $name['url'] . "'download><img alt src='assets/image/download.png'></a>";
         echo "<span class='click'>" . $b . "</span>";
         echo "<label for='$a'><img alt='' src='assets/image/trash.png'></label>";
         echo "</div>";
@@ -89,7 +88,7 @@ foreach ($data as $name) {
         echo "<div class='size_upload'>";
         echo "<img alt='' class='img_upload' src='assets/image/txt2.png' alt=" . $name['name'] . ">";
         echo "<div class='icone'>";
-        echo "<a id='lol' href='" . $name['url'] . "'download><img alt  src='assets/image/download.png'></a>";
+        echo "<a href='" . $name['url'] . "'download><img alt  src='assets/image/download.png'></a>";
         echo "<span>" . $b . "</span>";
         echo "<label for='$a'><img  alt='' src='assets/image/trash.png'></label>";
         echo "</div>";
@@ -105,7 +104,7 @@ foreach ($data as $name) {
         echo "<div class='size_upload'>";
         echo "<audio controls src='" . $name['url'] . "' class='img_upload'></audio>";
         echo "<div class='icone'>";
-        echo "<a id='lol' href='" . $name['url'] . "'download><img src='assets/image/download.png'></a>";
+        echo "<a href='" . $name['url'] . "'download><img alt src='assets/image/download.png'></a>";
         echo "<span>" . $b . "</span>";
         echo "<label for='$a'><img  alt='' src='assets/image/trash.png'></label>";
         echo "</div>";
@@ -121,7 +120,39 @@ foreach ($data as $name) {
         echo "<div class='size_upload'>";
         echo "<video controls src='$a' class='img_upload'></video>";
         echo "<div class='icone'>";
-        echo "<a id='lol' href='" . $name['url'] . "'download><img src='assets/image/download.png'></a>";
+        echo "<a href='" . $name['url'] . "'download><img alt src='assets/image/download.png'></a>";
+        echo "<span>" . $b . "</span>";
+        echo "<label for='$a'><img  alt='' src='assets/image/trash.png'></label>";
+        echo "</div>";
+        echo "<form method='POST'><input name='file_name' hidden value='$a'><input id='$a' hidden type='submit' name='delete_file' value='Suprimer'></form>";
+        echo "<form method='POST'>
+                    <input value='$a' hidden name='changeurl'>
+                    <input value='$b' hidden name='changename'>
+                    <input class='place2' type='text' name='change'>
+                    <input type='submit' class='place2bis' name='change_url' value='Rename'>
+              </form>";
+        echo "</div>";
+    } else if ($path_infos['extension'] == 'doc') {
+        echo "<div class='size_upload'>";
+        echo "<img alt='' class='img_upload' src='assets/image/doc.png' alt=" . $a . ">";
+        echo "<div class='icone'>";
+        echo "<a href='" . $name['url'] . "'download><img alt src='assets/image/download.png'></a>";
+        echo "<span>" . $b . "</span>";
+        echo "<label for='$a'><img  alt='' src='assets/image/trash.png'></label>";
+        echo "</div>";
+        echo "<form method='POST'><input name='file_name' hidden value='$a'><input id='$a' hidden type='submit' name='delete_file' value='Suprimer'></form>";
+        echo "<form method='POST'>
+                    <input value='$a' hidden name='changeurl'>
+                    <input value='$b' hidden name='changename'>
+                    <input class='place2' type='text' name='change'>
+                    <input type='submit' class='place2bis' name='change_url' value='Rename'>
+              </form>";
+        echo "</div>";
+    } else if ($path_infos['extension'] == 'pdf') {
+        echo "<div class='size_upload'>";
+        echo "<img alt='' class='img_upload' src='assets/image/pdf.png' alt=" . $a . ">";
+        echo "<div class='icone'>";
+        echo "<a href='" . $name['url'] . "'download><img alt src='assets/image/download.png'></a>";
         echo "<span>" . $b . "</span>";
         echo "<label for='$a'><img  alt='' src='assets/image/trash.png'></label>";
         echo "</div>";
@@ -143,7 +174,6 @@ foreach ($file as $folder) {
     echo "</div>";
     echo "</div>";
 }
-
 echo "</div>";
 ?>
 </body>

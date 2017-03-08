@@ -71,7 +71,8 @@ function check_upload()
     $format_accepte = false;
     if (($_FILES['file']['type'] == 'image/jpeg') || ($_FILES['file']['type'] == 'image/png') ||
         ($_FILES['file']['type'] == 'image/jpg') || ($_FILES['file']['type'] == 'text/plain') ||
-        ($_FILES['file']['type'] == 'audio/mp3')|| ($_FILES['file']['type'] == 'video/mp4')) {
+        ($_FILES['file']['type'] == 'audio/mp3')|| ($_FILES['file']['type'] == 'video/mp4') ||
+        ($_FILES['file']['type'] == 'application/msword') || ($_FILES['file']['type'] == 'application/pdf')) {
         $format_accepte = true;
         if (file_exists('uploads/' . $_SESSION['user_name'] . '/' . $_FILES['file']['name'])) {
             $exist_deja = true;
@@ -224,7 +225,7 @@ function listFolders()
     foreach ($url as $folder) {
         if ($folder != '.' && $folder != '..') {
             if (is_dir('uploads/' . $_SESSION['user_name'] . '/' . $folder)) {
-                $return[] = array($folder);
+                array_push($return, $folder);
             }
         }
     }
